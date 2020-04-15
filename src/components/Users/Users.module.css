@@ -1,0 +1,49 @@
+.preloader {
+  text-align: center;
+}
+
+.wrapp-users__page,
+.preloader {
+  background-color: silver;
+  max-width: 960px;
+  margin: 20px auto;
+}
+
+.wrapp-users {
+  width: 100%;
+}
+
+.wrapp-users__items {
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.wrapp-users__person img {
+  width: 150px;
+  height: 150px;
+}
+
+.number-users__items {
+  padding: 20px;
+  word-wrap: break-word;
+  cursor: pointer;
+}
+
+.number-user__item {
+  padding: 20px;
+  color: firebrick;
+  cursor: pointer;
+}
+
+.number-user__item-active {
+  margin: 20px;
+  color: rgb(104, 104, 104);
+  border: 1px solid #000;
+  padding: 5px;
+  border-radius: 100%;
+}

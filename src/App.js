@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./components/Header/Header";
+import Nav from "./components/Nav/Nav";
+import ContainerDialogs from "./components/Dialogs/ContainerDialogs";
+import { Route, BrowserRouter } from "react-router-dom";
+import Music from "./components/Music/Music";
+import News from "./components/News/News";
+import Settings from "./components/Settings/Settings";
+import ContainerUsers from "./components/Users/ContainerUsers";
+import ContainerProfile from "./components/Profile/ContainerProfile";
 
-function App() {
+import ClassApp from "./App.module.css";
+
+const App = (props) => {
+  // console.log(props.store);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className={ClassApp.container}>
+        {/* <Header /> */}
+        <Nav />
+        <div className="content">
+          <Route path="/dialogs" render={() => <ContainerDialogs />} />
+          <Route path="/users" render={() => <ContainerUsers />} />
+          <Route path="/profile/:userId?" render={() => <ContainerProfile />} />
+          <Route path="/news" render={() => <News />} />
+          <Route path="/music" render={() => <Music />} />
+          <Route path="/settings" render={() => <Settings />} />
+        </div>
+      </div>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

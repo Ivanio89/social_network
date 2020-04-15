@@ -1,0 +1,31 @@
+.wrapp-posts {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.wrapp-post__items {
+  width: 900px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.wrapp-post__write {
+  text-align: center;
+}
+
+.post-write textarea {
+  width: 500px;
+  height: 50px;
+  margin: 20px;
+  border: #fff;
+  border-bottom: 1px solid #333;
+  resize: none;
+}
+
+.add-post__btn {
+  margin: 20px;
+  cursor: pointer;
+  padding: 5px 20px;
+  outline: none;
+}
