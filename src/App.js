@@ -1,6 +1,5 @@
 import React from "react";
-import Header from "./components/Header/Header";
-import Nav from "./components/Nav/Nav";
+import NavContainer from "./components/Nav/NavContainer";
 import ContainerDialogs from "./components/Dialogs/ContainerDialogs";
 import { Route, BrowserRouter } from "react-router-dom";
 import Music from "./components/Music/Music";
@@ -17,7 +16,7 @@ const App = (props) => {
     <BrowserRouter>
       <div className={ClassApp.container}>
         {/* <Header /> */}
-        <Nav />
+        <NavContainer />
         <div className="content">
           <Route path="/dialogs" render={() => <ContainerDialogs />} />
           <Route path="/users" render={() => <ContainerUsers />} />

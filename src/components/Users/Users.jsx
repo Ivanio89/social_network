@@ -4,6 +4,7 @@ import ClassUser from "./Users.module.css";
 import { NavLink } from "react-router-dom";
 
 const Users = (props) => {
+  console.log(props);
   let pagesCount = Math.ceil(props.totalUsersCount / props.pagesSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
@@ -32,6 +33,9 @@ const Users = (props) => {
                 <div className={ClassUser["wrapp-users__btn"]}>
                   {user.followed ? (
                     <button
+                      disabled={props.folowindInProgress.some(
+                        (id) => id === user.id
+                      )}
                       onClick={() => {
                         props.unfollow(user.id);
                       }}
@@ -40,6 +44,9 @@ const Users = (props) => {
                     </button>
                   ) : (
                     <button
+                      disabled={props.folowindInProgress.some(
+                        (id) => id === user.id
+                      )}
                       onClick={() => {
                         props.follow(user.id);
                       }}

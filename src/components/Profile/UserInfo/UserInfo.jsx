@@ -1,6 +1,7 @@
 import React from "react";
 import ClassUser from "./UserInfo.module.css";
 import Preloader from "../../../common/Preloader/Preloader";
+import userPhoto from "../../../assets/images/user.png";
 
 const UserInfo = (props) => {
   console.log(props);
@@ -18,23 +19,51 @@ const UserInfo = (props) => {
         <div className={ClassUser["wrapp-profile__items"]}>
           <div className={ClassUser["wrapp-profile__item"]}>
             <div className={ClassUser["user-profile__photos"]}>
-              <img src={props.profile.photos.large} />
+              <img
+                src={
+                  props.profile.photos.large != null
+                    ? props.profile.photos.large
+                    : userPhoto
+                }
+              />
             </div>
           </div>
           <div className={ClassUser["wrapp-profile__item"]}>
             <div className={ClassUser["user-profile__info"]}>
               <ul>
-                <li>{props.profile.contacts.facebook}</li>
-                <li>{props.profile.contacts.vk}</li>
-                <li>{props.profile.contacts.instagram}</li>
-                <li>{props.profile.contacts.github}</li>
-                <li>{props.profile.aboutMe}</li>
+                <li>
+                  {props.profile.contacts.facebook != null
+                    ? props.profile.contacts.facebook
+                    : "not info"}
+                </li>
+                <li>
+                  {props.profile.contacts.vk != null
+                    ? props.profile.contacts.vk
+                    : "not info"}
+                </li>
+                <li>
+                  {props.profile.contacts.instagram != null
+                    ? props.profile.contacts.instagram
+                    : "not info"}
+                </li>
+                <li>
+                  {props.profile.contacts.github != null
+                    ? props.profile.contacts.github
+                    : "not info"}
+                </li>
+                <li>
+                  {props.profile.aboutMe != null
+                    ? props.profile.aboutMe
+                    : "not info"}
+                </li>
               </ul>
             </div>
           </div>
           <div className={ClassUser["wrapp-profile__item"]}>
             <div className={ClassUser["user-profile__name"]}>
-              {props.profile.fullName}
+              {props.profile.fullName != null
+                ? props.profile.fullName
+                : "not name"}
             </div>
           </div>
           <div className={ClassUser["wrapp-profile__item"]}>

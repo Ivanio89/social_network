@@ -1,8 +1,9 @@
 import React from "react";
-import ClassNav from "./Nav.module.css"; //object
+import ClassNav from "./Nav.module.css";
 import { NavLink } from "react-router-dom";
 
-const nav = () => {
+const Nav = (props) => {
+  // console.log(props);
   return (
     <nav className={ClassNav.nav}>
       <div className={ClassNav.items}>
@@ -36,9 +37,14 @@ const nav = () => {
             <h4>Settings</h4>
           </NavLink>
         </div>
+        <div className="login-block">
+          <NavLink to={"/login"} style={{ color: "white" }}>
+            {props.isAuth ? props.login : "login"}
+          </NavLink>
+        </div>
       </div>
     </nav>
   );
 };
 
-export default nav;
+export default Nav;
