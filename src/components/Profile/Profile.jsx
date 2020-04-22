@@ -4,11 +4,15 @@ import ContainerMyPost from "./MyPosts/ContainerMyPost";
 import UserInfo from "./UserInfo/UserInfo";
 
 const Profile = (props) => {
-  // console.log(props);
+  // console.log(props.profile);
   return (
     <div className={ProfileClasses.content}>
       <div className={ProfileClasses.background}></div>
-      <UserInfo profile={props.profile} />
+      <UserInfo
+        profile={props.profile}
+        status={props.status}
+        updateUserStatus={props.updateUserStatus}
+      />
       <ContainerMyPost />
     </div>
   );

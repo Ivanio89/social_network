@@ -4,7 +4,7 @@ import ClassUser from "./Users.module.css";
 import { NavLink } from "react-router-dom";
 
 const Users = (props) => {
-  console.log(props);
+  // console.log(props);
   let pagesCount = Math.ceil(props.totalUsersCount / props.pagesSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
@@ -75,7 +75,7 @@ const Users = (props) => {
                   props.onPageChanged(page);
                 }}
                 className={
-                  ClassUser["number-user__item"] &&
+                  // ClassUser["number-user__item"] &&
                   props.currentPage === page &&
                   ClassUser["number-user__item-active"]
                 }

@@ -1,19 +1,30 @@
 import React from "react";
 import NavContainer from "./components/Nav/NavContainer";
 import ContainerDialogs from "./components/Dialogs/ContainerDialogs";
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import ContainerUsers from "./components/Users/ContainerUsers";
 import ContainerProfile from "./components/Profile/ContainerProfile";
-
+import LoginPage from "./components/login/login";
+import { initializeApp } from "./components/redux/app-reducer";
 import ClassApp from "./App.module.css";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import Preloader from "./common/Preloader/Preloader";
 
-const App = (props) => {
-  // console.log(props.store);
-  return (
-    <BrowserRouter>
+class App extends React.Component {
+  componentDidMount() {
+    this.props.initializeApp();
+  }
+  render() {
+    console.log(this.props);
+
+    if (!this.props.initialized) {
+      return <Preloader />;
+    }
+    return (
       <div className={ClassApp.container}>
         {/* <Header /> */}
         <NavContainer />
@@ -24,10 +35,18 @@ const App = (props) => {
           <Route path="/news" render={() => <News />} />
           <Route path="/music" render={() => <Music />} />
           <Route path="/settings" render={() => <Settings />} />
+          <Route path="/login" render={() => <LoginPage />} />
         </div>
       </div>
-    </BrowserRouter>
-  );
-};
+    );
+  }
+}
 
-export default App;
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized,
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, { initializeApp })
+)(App);

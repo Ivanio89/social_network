@@ -58,7 +58,7 @@ const UsersReducer = (state = initilState, action) => {
         ...state,
         folowindInProgress: action.isFetching
           ? [...state.folowindInProgress, action.userId]
-          : state.folowindInProgress.filter((id) => id != action.userId),
+          : state.folowindInProgress.filter((id) => id !== action.userId),
       };
     }
     default:
@@ -73,6 +73,7 @@ export const setCurrentPage = (currentPage) => ({
   type: SETCURRENTPAGE,
   currentPage,
 });
+
 export const setUsersTotalCount = (count) => ({
   type: TOTALCOUNT,
   count,
@@ -88,11 +89,13 @@ export const setIsProgress = (isFetching, userId) => ({
   userId,
 });
 
-export const getUsers = (currentPage, pagesSize) => {
+export const getUsers = (page, pagesSize) => {
   return (dispatch) => {
     dispatch(setIsFetching(true));
-
-    usersAPI.getUsers(currentPage, pagesSize).then((data) => {
+    dispatch(setCurrentPage(page));
+    // console.log(currentPage);
+    usersAPI.getUsers(page, pagesSize).then((data) => {
+      // console.log(currentPage, pagesSize);
       dispatch(setIsFetching(false));
       dispatch(setUsers(data.items));
       dispatch(setUsersTotalCount(data.totalCount));

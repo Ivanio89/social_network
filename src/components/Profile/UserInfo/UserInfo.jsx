@@ -2,12 +2,14 @@ import React from "react";
 import ClassUser from "./UserInfo.module.css";
 import Preloader from "../../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
+import ProfileStatus from "../ProfileStatus";
 
 const UserInfo = (props) => {
-  console.log(props);
+  // console.log(props);
   if (!props.profile) {
     return (
       <div className={ClassUser["wrapp-profile"]}>
+        <ProfileStatus status={props.status} />
         <div className={ClassUser["wrapp-profile__preloader"]}>
           <Preloader />
         </div>
@@ -64,6 +66,12 @@ const UserInfo = (props) => {
               {props.profile.fullName != null
                 ? props.profile.fullName
                 : "not name"}
+            </div>
+            <div className={ClassUser["wrapp-profile__status"]}>
+              <ProfileStatus
+                status={props.status}
+                updateUserStatus={props.updateUserStatus}
+              />
             </div>
           </div>
           <div className={ClassUser["wrapp-profile__item"]}>

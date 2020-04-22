@@ -39,7 +39,14 @@ const Nav = (props) => {
         </div>
         <div className="login-block">
           <NavLink to={"/login"} style={{ color: "white" }}>
-            {props.isAuth ? props.login : "login"}
+            {props.isAuth ? (
+              <div>
+                {props.login}
+                <button onClick={props.logout}>logout</button>
+              </div>
+            ) : (
+              "login"
+            )}
           </NavLink>
         </div>
       </div>

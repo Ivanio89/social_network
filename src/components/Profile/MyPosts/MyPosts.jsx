@@ -1,48 +1,59 @@
 import React from "react";
 import Post from "./Post/Post";
 import ClassPost from "./MyPosts.module.css";
+import { Field, reduxForm } from "redux-form";
+import {
+  required,
+  maxLengthCreator,
+  minLengthCreator,
+} from "../../utils/validators/validators";
+import { Textarea } from "../../../common/FormsControl/FormControl";
+
+const maxLength30 = maxLengthCreator(30);
+const minLength5 = minLengthCreator(5);
 
 const MyPosts = (props) => {
-  // console.log(props.profilePage.postsDate);
+  // console.log(props);
   const postsUser = props.profilePage.postsDate.map((post) => (
     <Post key={post.id} message={post.message} like={post.licksCount} />
   ));
 
-  let getNewPost = React.createRef();
-
-  const onAddPost = () => {
-    props.addPost();
-  };
-
-  const onPostChange = () => {
-    let text = getNewPost.current.value;
-    props.updateNewPostText(text);
+  const onAddPost = (myPost) => {
+    props.sendaddPost(myPost.newPostText);
+    console.log(myPost.newPostText);
   };
 
   return (
     <div className={ClassPost["wrapp-posts"]}>
+      <div className={ClassPost["wrapp-post__items"]}></div>
       <div className={ClassPost["wrapp-post__items"]}>
-        <div className={ClassPost["wrapp-post__write"]}>
-          <div className={ClassPost["post-write"]}>
-            <textarea
-              onChange={onPostChange}
-              ref={getNewPost}
-              cols="30"
-              rows="10"
-              value={props.newPostText}
-              placeholder="write to post"
-            />
-          </div>
-          <button onClick={onAddPost} className={ClassPost["add-post__btn"]}>
-            Add post
-          </button>
-        </div>
-      </div>
-      <div className={ClassPost["wrapp-post__items"]}>
+        <MyPostFormRedux onSubmit={onAddPost} />
         <div className={ClassPost["wrapp-post__item"]}>{postsUser}</div>
       </div>
     </div>
   );
 };
+
+const AddNewPostForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div className={ClassPost["wrapp-post__write"]}>
+        <div className={ClassPost["post-write"]}>
+          <Field
+            validate={[required, maxLength30, minLength5]}
+            component={Textarea}
+            placeholder="write to post"
+            name="newPostText"
+          />
+        </div>
+        <button className={ClassPost["add-post__btn"]}>Add post</button>
+      </div>
+    </form>
+  );
+};
+
+const MyPostFormRedux = reduxForm({ form: "ProfileAddNewPostForm" })(
+  AddNewPostForm
+);
 
 export default MyPosts;
