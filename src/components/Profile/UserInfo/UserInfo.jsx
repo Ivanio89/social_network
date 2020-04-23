@@ -3,6 +3,7 @@ import ClassUser from "./UserInfo.module.css";
 import Preloader from "../../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatus from "../ProfileStatus";
+import ProfileStatusWithHooks from "../PrifileStatusWithHooks";
 
 const UserInfo = (props) => {
   // console.log(props);
@@ -68,7 +69,8 @@ const UserInfo = (props) => {
                 : "not name"}
             </div>
             <div className={ClassUser["wrapp-profile__status"]}>
-              <ProfileStatus
+              {/* <ProfileStatus */}
+              <ProfileStatusWithHooks
                 status={props.status}
                 updateUserStatus={props.updateUserStatus}
               />

@@ -12,8 +12,10 @@ import { Textarea } from "../../../common/FormsControl/FormControl";
 const maxLength30 = maxLengthCreator(30);
 const minLength5 = minLengthCreator(5);
 
-const MyPosts = (props) => {
-  // console.log(props);
+const MyPosts = React.memo((props) => {
+  console.log(props);
+  console.log("render");
+
   const postsUser = props.profilePage.postsDate.map((post) => (
     <Post key={post.id} message={post.message} like={post.licksCount} />
   ));
@@ -32,7 +34,7 @@ const MyPosts = (props) => {
       </div>
     </div>
   );
-};
+});
 
 const AddNewPostForm = (props) => {
   return (
