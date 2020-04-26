@@ -1,6 +1,6 @@
 import React from "react";
 import { reduxForm, Field, change } from "redux-form";
-import { Input } from "../../common/FormsControl/FormControl";
+import { Input, creactField } from "../../common/FormsControl/FormControl";
 import {
   required,
   maxLengthCreator,
@@ -14,42 +14,54 @@ import StyleLogin from "./login.module.css";
 const max = maxLengthCreator(20);
 const min = minLengthCreator(5);
 
-const LoginForm = (props) => {
-  console.log(props);
+const LoginForm = ({ handleSubmit, error }) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div>
-        <Field
+        {creactField("Write email", "email", [required, min, max], Input, {
+          type: "text",
+        })}
+        {/* <Field
           type={"text"}
           placeholder={"Write email"}
           component={Input}
           validate={[required, min, max]}
           name={"email"}
-        />
+        /> */}
       </div>
       <div>
-        <Field
+        {creactField(
+          "Write password",
+          "password",
+          [required, min, max],
+          Input,
+          {
+            type: "password",
+          }
+        )}
+        {/* <Field
           type={"password"}
           placeholder={"Write password"}
           component={Input}
           validate={[required, min, max]}
           name={"password"}
-        />
+        /> */}
       </div>
       <div>
         <p>
-          <Field
+          {creactField(null, "rememberMe", [required], Input, {
+            type: "checkbox",
+          })}
+          {/* <Field
             type={"checkbox"}
             component={Input}
             name={"rememberMe"}
             validate={[required, min, max]}
-          />
+          /> */}
           remember me
         </p>
       </div>
-      {props.error && (
-        <div className={StyleLogin["form-summary-error"]}>{props.error}</div>
-      )}
+      {error && <div className={StyleLogin["form-summary-error"]}>{error}</div>}
       <div className="">
         <button>login</button>
       </div>

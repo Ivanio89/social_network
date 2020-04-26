@@ -13,8 +13,8 @@ const maxLength30 = maxLengthCreator(30);
 const minLength5 = minLengthCreator(5);
 
 const MyPosts = React.memo((props) => {
-  console.log(props);
-  console.log("render");
+  // console.log(props);
+  // console.log("render");
 
   const postsUser = props.profilePage.postsDate.map((post) => (
     <Post key={post.id} message={post.message} like={post.licksCount} />
@@ -22,7 +22,7 @@ const MyPosts = React.memo((props) => {
 
   const onAddPost = (myPost) => {
     props.sendaddPost(myPost.newPostText);
-    console.log(myPost.newPostText);
+    // console.log(myPost.newPostText);
   };
 
   return (

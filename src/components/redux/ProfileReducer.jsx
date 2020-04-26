@@ -3,6 +3,7 @@ import { usersAPI, getProfileAPI } from "../../api/api";
 const add_post = "ADD_POST";
 const SETUSERPROFILE = "set_user_profile";
 const SETUSERSTATUS = "set_user_status";
+const DELETEPOST = "delete_post";
 
 let initilState = {
   postsDate: [
@@ -30,6 +31,13 @@ const ProfileReducer = (state = initilState, action) => {
       return { ...state, profile: action.profile };
     case SETUSERSTATUS:
       return { ...state, status: action.status };
+    // case DELETEPOST:
+    //   return {
+    //     ...state,
+    //     posts: state.postsDate.filter((post) => {
+    //       post.id !== action.postId; //отфильтровка постов которые не равны action.postId
+    //     }),
+    //   };
     default:
       return state;
   }
@@ -49,31 +57,33 @@ export const setUserStatusActionCreator = (status) => ({
   status,
 });
 
+export const deletePost = (postId) => ({
+  type: DELETEPOST,
+  postId,
+});
+
 export const updateUserStatusActionCreator = (text) => ({
   type: SETUSERSTATUS,
   newText: text,
 });
 
-export const getUserProfile = (userId) => (dispatch) => {
+export const getUserProfile = (userId) => async (dispatch) => {
   console.log(userId);
-  usersAPI.getUserProfile(userId).then((response) => {
-    dispatch(setUserProfileActionCreator(response.data));
-  });
+  const response = await usersAPI.getUserProfile(userId);
+  dispatch(setUserProfileActionCreator(response.data));
 };
 
-export const getUserStatus = (userId) => (dispatch) => {
+export const getUserStatus = (userId) => async (dispatch) => {
   // console.log(userId);
-  getProfileAPI.getUserStatus(userId).then((response) => {
-    dispatch(setUserStatusActionCreator(response.data));
-  });
+  const response = await getProfileAPI.getUserStatus(userId);
+  dispatch(setUserStatusActionCreator(response.data));
 };
 
-export const updateUserStatus = (status) => (dispatch) => {
-  getProfileAPI.updateUserStatus(status).then((response) => {
-    if (response.data.resultCode === 0) {
-      dispatch(setUserStatusActionCreator(status));
-    }
-  });
+export const updateUserStatus = (status) => async (dispatch) => {
+  const response = await getProfileAPI.updateUserStatus(status);
+  if (response.data.resultCode === 0) {
+    dispatch(setUserStatusActionCreator(status));
+  }
 };
 
 export default ProfileReducer;

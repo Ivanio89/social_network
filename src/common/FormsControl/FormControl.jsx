@@ -1,12 +1,19 @@
 import React from "react";
 import StyleForm from "./FormControl.module.css";
+import { Field } from "redux-form";
 
-const FormControl = ({ input, meta, child, ...props }) => {
-  const errorsForm = meta.touched && meta.error;
+const FormControl = ({
+  input,
+  meta: { touched, error },
+  child,
+  children,
+  ...props
+}) => {
+  const errorsForm = touched && error;
   return (
     <div className={!errorsForm ? StyleForm["form-control"] : StyleForm.error}>
-      {props.children}
-      <div className="">{errorsForm && <span>{meta.error}</span>}</div>
+      {children}
+      <div className="">{errorsForm && <span>{error}</span>}</div>
     </div>
   );
 };
@@ -26,5 +33,25 @@ export const Input = (props) => {
     <FormControl {...props}>
       <input {...input} {...restProps} />
     </FormControl>
+  );
+};
+
+export const creactField = (
+  placeholder,
+  name,
+  validators,
+  component,
+  type,
+  props = {}
+) => {
+  return (
+    <Field
+      type={type.type}
+      placeholder={placeholder}
+      component={component}
+      validate={validators}
+      name={name}
+      {...props}
+    />
   );
 };
